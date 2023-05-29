@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout::head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<script th:src="@{/js/web/categoria/categoria.js}" type="text/javascript"></script>
+	<nav th:insert="layout::menu"></nav>
+	<br>
+	<button type="button" id="btnagregar" class="btn btn-primary">Agregar Nueva Categoria</button>
+	<br>
+	<table class="table" id="tblcategoria">
+		<thead>
+			<tr>
+				<th scope="col">Código de Categoria</th>
+				<th scope="col">Nombre de Categoria</th>
+				<th scope="col">Actualizar</th>
+				<th scope="col">Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="categoria :${lstCategorias}">
+				<td th:text="${categoria.category_id}"></td>
+				<td th:text="${categoria.category_name}"></td>
+				<td>
+					<button type="button" class="btn btn-success btnactualizar"
+					th:data-idcategoria="${categoria.category_id}"
+					th:data-desccategoria="${categoria.category_name}"
+					>
+						<i class="fas fa-pen"></i>
+					</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-danger btneliminarcategoria"
+					th:data-idcategoria="${categoria.category_id}"
+					th:data-desccategoria="${categoria.category_name}"
+					>
+						<i class="fas fa-trash"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- Modal Registro / actualizacion SALA -->
+	<div class="modal fade" id="modalCategoria" tabindex="-1"aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Mantenimiento Categoria</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+				<div class="mb-3">
+						<label for="txtcategoria" class="form-label">Id Categoria:</label> 
+						<input type="text" class="form-control" id="txtcategoria" >
+					</div>
+					<div class="mb-3">
+						<label for="txtdescripcion" class="form-label">Nombre Categoria:</label> 
+						<input type="text" class="form-control" id="txtdescripcion" >
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btnguardar">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Modal Eliminar SALA -->
+	<div class="modal fade" id="modalEliminarCategoria" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Categoria</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">		
+					<label id="mensajeeliminar"></label>
+					<input type="hidden" id="hddideliminarsala"value="0">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"id="btneliminar">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
